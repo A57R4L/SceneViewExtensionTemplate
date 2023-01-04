@@ -1,0 +1,19 @@
+{
+    "FileVersion": 3,
+    "Version": 1,
+    "VersionName": "1.0",
+    "FriendlyName": "SceneViewExtensionTemplate",
+    "Description": "Plugin template for Custom SceneViewExtension",
+    "Category": "Code Tools",
+    "CreatedBy": "Ossi Luoto",
+    "Modules": [
+
+        {
+            "Name": "SceneViewExtensionTemplate",
+            "Type": "Runtime",
+            "LoadingPhase": "PostConfigInit",
+            "WhitelistPlatforms": [ "Win64"]
+        }
+    ],
+    "EnabledByDefault": false
+}

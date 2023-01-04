@@ -1,0 +1,60 @@
+// Custom SceneViewExtension Template for Unreal Engine
+// Copyright 2023 Ossi Luoto
+// 
+// Custom CS PostProcessing Shader
+
+#include "/Engine/Public/Platform.ush"
+#include "/Engine/Private/Common.ush"
+
+// Default border size for group.
+#define DEFAULT_GROUP_BORDER_SIZE 8
+#define GROUP_BORDER_SIZE (DEFAULT_GROUP_BORDER_SIZE)
+
+// Shader parameters
+
+// SceneColor texture
+Texture2D OriginalSceneColor;
+
+// Viewport size
+uint4 ViewportRect;
+
+// This is the UV for Viewport
+float2 ViewportInvSize;
+
+// This is the multiplier to scale Viewport UV (0..1) to current SceneColor RT
+float2 SceneColorUVScale;
+
+// Output
+RWTexture2D<float4> Output;
+
+// Compute Shader code
+[numthreads(GROUP_BORDER_SIZE, GROUP_BORDER_SIZE, 1)]
+void MainCS(uint2 DispatchThreadId : SV_DispatchThreadID)
+{
+	// Check that we are in scope
+    if (any(DispatchThreadId >= ViewportRect.zw))
+    {
+        return;
+    }
+
+    // If we have the Original Scene Color still here, we need to use the original offset as well
+    // Due to UniformBuffer refering to the Viewport before TAA (this might change in the future?) we need to apply scale to the UV
+    float2 sampleUV = (float2(View.ViewRectMin.xy) + (DispatchThreadId + 0.5)) * ViewportInvSize;
+
+    // At this point our sampleUV is mapped to 0..1
+    // ..
+    // This is the UV value one might want to use if f.ex. altering the coordinates via shader formula
+
+    // As the actual viewport might not utilize the full texture, we need to scale accordingly - see calculation on the .cpp side
+    sampleUV = sampleUV * SceneColorUVScale;
+
+    // sample OriginalColor
+    float4 OriginalColor = OriginalSceneColor.SampleLevel(GlobalPointClampedSampler, sampleUV, 0);
+
+    // For testing, and our actial effect here, switch Red and Blue
+    float4 OutputColor = float4(OriginalColor.z, OriginalColor.y, OriginalColor.x, OriginalColor.w);
+
+    // Write output
+    Output[View.ViewRectMin.xy + DispatchThreadId] = OutputColor;
+    //Output[sampleUV] = OutputColor;
+}
