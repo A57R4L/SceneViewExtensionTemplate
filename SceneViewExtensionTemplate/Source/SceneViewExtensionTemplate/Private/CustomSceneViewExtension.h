@@ -1,5 +1,5 @@
 // Custom SceneViewExtension Template for Unreal Engine
-// Copyright 2023 Ossi Luoto
+// Copyright 2023 - 2024 Ossi Luoto
 // 
 // Custom SceneViewExtension implementation
 
@@ -10,6 +10,9 @@
 #include "SceneViewExtension.h"
 #include "PostProcess/PostProcessing.h"
 #include "PostProcess/PostProcessMaterial.h"
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 4
+#include "DataDrivenShaderPlatformInfo.h"
+#endif
 
 class FCustomSceneViewExtension : public FSceneViewExtensionBase
 {

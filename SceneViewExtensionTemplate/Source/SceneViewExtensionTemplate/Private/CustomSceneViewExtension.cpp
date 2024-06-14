@@ -1,5 +1,5 @@
 // Custom SceneViewExtension Template for Unreal Engine
-// Copyright 2023 Ossi Luoto
+// Copyright 2023 - 2024 Ossi Luoto
 // 
 // Custom SceneViewExtension implementation
 
@@ -39,7 +39,11 @@ FScreenPassTexture FCustomSceneViewExtension::CustomPostProcessing(FRDGBuilder& 
 	const FSceneViewFamily& ViewFamily = *SceneView.Family;
 	const ERHIFeatureLevel::Type FeatureLevel = SceneView.GetFeatureLevel();
 
-	const FScreenPassTexture& SceneColor = Inputs.Textures[(uint32)EPostProcessMaterialInput::SceneColor];
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 4
+	const FScreenPassTexture& SceneColor = FScreenPassTexture::CopyFromSlice(GraphBuilder, Inputs.GetInput(EPostProcessMaterialInput::SceneColor));
+#elif
+	const FScreenPassTexture & SceneColor = Inputs.Textures[(uint32)EPostProcessMaterialInput::SceneColor];
+#endif
 
 	if (!SceneColor.IsValid() || CVarShaderOn.GetValueOnRenderThread() == 0)
 	{
