@@ -41,7 +41,7 @@ FScreenPassTexture FCustomSceneViewExtension::CustomPostProcessing(FRDGBuilder& 
 
 #if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 4
 	const FScreenPassTexture& SceneColor = FScreenPassTexture::CopyFromSlice(GraphBuilder, Inputs.GetInput(EPostProcessMaterialInput::SceneColor));
-#elif
+#else
 	const FScreenPassTexture & SceneColor = Inputs.Textures[(uint32)EPostProcessMaterialInput::SceneColor];
 #endif
 
