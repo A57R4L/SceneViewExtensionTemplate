@@ -32,3 +32,4 @@ I have tried to keep the code as simple as possible and document the most releva
 ### Updates
 
 June 2024: Update the template for Unreal Engine 5.4
+October 2024: Added update/fixes for Unreal Engine 5.5-preview
