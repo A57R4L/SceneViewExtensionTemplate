@@ -1,5 +1,5 @@
 // Custom SceneViewExtension Template for Unreal Engine
-// Copyright 2023 - 2024 Ossi Luoto
+// Copyright 2023 - 2025 Ossi Luoto
 // 
 // Subsystem to keep custom SceneViewExtension alive
 

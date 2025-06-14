@@ -31,5 +31,6 @@ I have tried to keep the code as simple as possible and document the most releva
 
 ### Updates
 
-June 2024: Update the template for Unreal Engine 5.4
+June 2025: Update for Unreal Engine 5.6, clean up code and simplify the example setup, move 5.0-5.5 to legacy branch
 October 2024: Added update/fixes for Unreal Engine 5.5-preview
+June 2024: Update the template for Unreal Engine 5.4

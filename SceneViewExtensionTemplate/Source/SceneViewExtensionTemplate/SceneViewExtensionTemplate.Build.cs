@@ -1,5 +1,5 @@
 // Custom SceneViewExtension Template for Unreal Engine
-// Copyright 2023 - 2024 Ossi Luoto
+// Copyright 2023 - 2025 Ossi Luoto
 
 using UnrealBuildTool;
 using System.IO;
@@ -24,8 +24,9 @@ public class SceneViewExtensionTemplate : ModuleRules
 
         PrivateIncludePaths.AddRange(
             new string[] {
-				// this is required to find PostProcessing includes f.ex. screenpass.h
-				Path.Combine(EngineDir, "Source/Runtime/Renderer/Private")
+				// Required to find PostProcessing includes f.ex. screenpass.h & TranslucentPassResource.h
+				Path.Combine(EngineDir, "Source/Runtime/Renderer/Private"),
+                Path.Combine(EngineDir, "Source/Runtime/Renderer/Internal")
             }
         );
     }
